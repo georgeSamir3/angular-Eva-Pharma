@@ -1,0 +1,38 @@
+<h1>{{ StoreName|uppercase }}</h1>
+
+<img [src]="StoreLogo" alt="Store Logo" />
+
+<h3 *ngIf="Discount !== 'No Discount'">
+  We offer a discount of: {{ Discount }}
+</h3>
+<select name="dropdown" id="drop">
+  <option *ngFor="let cat of CategoryList" [value]="cat">{{ cat.name }}</option>
+</select>
+<table *ngIf="!IsPurchased">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Image</th>
+  </tr>
+  <tr *ngFor="let product of ProductList">
+    <td>{{ product.id }}</td>
+    <td>{{ product.name }}</td>
+    <td>{{ product.quantity }}</td>
+    <td>{{ product.price }}</td>
+    <td>
+      <img style="width: 150px" [src]="product.img" alt="Product Image" />
+    </td>
+  </tr>
+</table>
+<br>
+<input type="text" placeholder="enter your name" [(ngModel)]="userName" />
+
+{{ userName }}
+<br />
+
+<div *ngIf="IsPurchased">
+  Thanks for purchasing from our Store, {{ userName }}!
+</div>
+<button (click)="buy()">Buy</button>
