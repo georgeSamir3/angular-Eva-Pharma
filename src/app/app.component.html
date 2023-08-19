@@ -1,3 +1,4 @@
 <app-header></app-header>
-<app-products></app-products>
+ <button (click)="toggleProducts()">{{ show ? 'Hide' : 'Show' }} Products</button>
+ <app-products *ngIf="show"></app-products>
 <app-footer></app-footer>

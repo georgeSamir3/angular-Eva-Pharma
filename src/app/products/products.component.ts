@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProductServiceService } from '../product-service.service';
+
 import { DiscountOffers } from '../shared/classesAndTypes/discount.enum';
 import { IProduct } from '../shared/classesAndTypes/product.interface';
 import { ICategory } from '../shared/classesAndTypes/category.interface';
-import { NgModel } from '@angular/forms';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   Discount: DiscountOffers;
   StoreName: string;
   StoreLogo: string;
@@ -16,17 +18,13 @@ export class ProductsComponent {
   CategoryList: ICategory[];
   ClientName: string;
   IsPurchased: boolean;
-  userName:string="";
+  userName: string = "";
 
-  constructor() {
-    
+  constructor(private productService: ProductServiceService) {
     this.Discount = DiscountOffers["15%"];
     this.StoreName = "My Store";
     this.StoreLogo = "../assets/img.png";
-    this.ProductList = [
-      { id: 1, name: "Product 1", quantity: 10, price: 20, img: "../assets/img.png" },
-      { id: 2, name: "Product 2", quantity: 5, price: 15, img: "../assets/img.png" },
-    ];
+    this.ProductList = [];
     this.CategoryList = [
       { id: 1, name: "Category 1" },
       { id: 2, name: "Category 2" },
@@ -34,6 +32,15 @@ export class ProductsComponent {
     this.ClientName = "george";
     this.IsPurchased = false;
   }
+
+  ngOnInit(): void {
+    this.renderValues();
+  }
+
+  renderValues(): void {
+    this.ProductList = this.productService.getAllProducts();
+  }
+
   buy(): void {
     this.IsPurchased = !this.IsPurchased;
   }
