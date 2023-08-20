@@ -1,35 +1,32 @@
-
-import { Component, AfterViewInit, ChangeDetectorRef, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  ChangeDetectorRef,
+  QueryList,
+  ViewChildren,
+  ViewChild,
+  OnInit,
+} from '@angular/core';
 import { ProductsComponent } from './products/products.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit {
   show: boolean = true;
-  @ViewChildren(ProductsComponent)
+  
+  @ViewChild(ProductsComponent) child: ProductsComponent;
   productsComponents!: QueryList<ProductsComponent>;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
-    this.renderChildValues();
+    console.log("child values "+this.child.renderValues());
+    this.child.renderValues()
   }
-
-  renderChildValues(): void {
-    if (this.productsComponents && this.productsComponents.length > 0) {
-      const productsComponent = this.productsComponents.first;
-      productsComponent.renderValues();
-
-      setTimeout(() => {
-        this.show = !this.show;
-        this.cdr.detectChanges();
-        console.log(this.show);
-      });
-    }
-  }
+  ngOnInit(): void {}
 
   toggleProducts(): void {
     this.show = !this.show;

@@ -37,7 +37,7 @@ export class ProductsComponent implements OnInit {
     this.renderValues();
   }
 
-  renderValues(): void {
+  public renderValues(): void {
     this.ProductList = this.productService.getAllProducts();
   }
 
