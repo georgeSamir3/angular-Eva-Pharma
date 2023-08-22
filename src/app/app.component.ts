@@ -15,20 +15,21 @@ import { ProductsComponent } from './products/products.component';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  show: boolean = true;
-  
-  @ViewChild(ProductsComponent) child: ProductsComponent;
-  productsComponents!: QueryList<ProductsComponent>;
+  show: boolean = false;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  @ViewChild('child', { static: false })
+  child!: ProductsComponent;
 
-  ngAfterViewInit(): void {
-    console.log("child values "+this.child.renderValues());
-    this.child.renderValues()
-  }
+  constructor() {}
+
   ngOnInit(): void {}
 
   toggleProducts(): void {
     this.show = !this.show;
+    if (this.show) {
+      setTimeout(() => {
+        this.child.renderValues();
+      });
+    }
   }
 }

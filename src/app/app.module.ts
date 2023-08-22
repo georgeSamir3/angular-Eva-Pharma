@@ -7,6 +7,10 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductsComponent } from './products/products.component';
 import { FormsModule } from '@angular/forms';
+import { UsersComponent } from './users/users.component';
+import { PostsComponent } from './posts/posts.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommentsComponent } from './comments/comments.component';
 
 
 @NgModule({
@@ -14,12 +18,17 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ProductsComponent
+    ProductsComponent,
+    UsersComponent,
+    PostsComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    // HttpClient,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
