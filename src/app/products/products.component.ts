@@ -4,6 +4,7 @@ import { ProductServiceService } from '../product-service.service';
 import { DiscountOffers } from '../shared/classesAndTypes/discount.enum';
 import { IProduct } from '../shared/classesAndTypes/product.interface';
 import { ICategory } from '../shared/classesAndTypes/category.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -20,7 +21,7 @@ export class ProductsComponent implements OnInit {
   IsPurchased: boolean;
   userName: string = "";
 
-  constructor(private productService: ProductServiceService) {
+  constructor(private productService: ProductServiceService,private router:Router) {
     this.Discount = DiscountOffers["15%"];
     this.StoreName = "My Store";
     this.StoreLogo = "../assets/img.png";
@@ -43,5 +44,12 @@ export class ProductsComponent implements OnInit {
 
   buy(): void {
     this.IsPurchased = !this.IsPurchased;
+  }
+  navigateToProductsWithDiscount() {
+    this.router.navigate(['products', 'discount']);
+  }
+  
+  navigateToProductsWithoutDiscount() {
+    this.router.navigate(['products', 'no-discount']);
   }
 }

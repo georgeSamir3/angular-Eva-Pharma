@@ -1,0 +1,48 @@
+
+  <form [formGroup]="registrationForm" (ngSubmit)="submitForm()">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" formControlName="username" required>
+      <div *ngIf="isFieldInvalid('username')">
+        <div *ngIf="registrationForm.get('username')?.errors?.['required']">Username is required.</div>
+        <div *ngIf="registrationForm.get('username')?.errors?.['pattern']">Username must contain only capital and small characters.</div>
+      </div>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" required>
+      <div *ngIf="isFieldInvalid('email')">
+        <div *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required.</div>
+        <div *ngIf="registrationForm.get('email')?.errors?.['pattern']">Email must be in the format aaa@bb.com.</div>
+      </div>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" required>
+      <div *ngIf="isFieldInvalid('password')">
+        <div *ngIf="registrationForm.get('password')?.errors?.['required']">Password is required.</div>
+      </div>
+    </div>
+    <div>
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" required>
+      <div *ngIf="isFieldInvalid('confirmPassword')">
+        <div *ngIf="registrationForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required.</div>
+        <div *ngIf="registrationForm.get('confirmPassword')?.errors?.['match']">Passwords do not match.</div>
+      </div>
+    </div>
+    <div>
+      <label for="heardAbout">Where did you hear about us?</label>
+      <select id="heardAbout" formControlName="heardAbout" required>
+        <option value="">Select an option</option>
+        <option value="facebook">Facebook</option>
+        <option value="twitter">Twitter</option>
+        <option value="google">Google</option>
+      </select>
+    </div>
+    <div>
+      <button type="submit"
+       
+       >Register</button>
+    </div>
+  </form>
